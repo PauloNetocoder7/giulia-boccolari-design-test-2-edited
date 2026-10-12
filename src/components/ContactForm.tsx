@@ -15,14 +15,13 @@ import { Send, AlertCircle, Loader2 } from 'lucide-react';
  *    progetto (Settings → Environment Variables) con la chiave della
  *    cliente. Quando presente, ha sempre la priorità sul fallback.
  *
- * Chiave attuale impostata come fallback: chiave di TEST (legata alla tua
- * email), da usare solo nella demo pubblicata. Prima di consegnare il sito
- * alla cliente, genera una nuova chiave su web3forms.com con l'email di lei
- * (che dovrà confermarla) e sostituiscila qui.
+ * Chiave attuale impostata come fallback: chiave DEFINITIVA della cliente,
+ * registrata su web3forms.com con l'email giulia.boccolari@gmail.com.
+ * I messaggi inviati dal modulo arrivano a quella casella.
  */
 export const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 export const FORM_ACCESS_KEY: string =
-  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '21a46d78-170c-454d-8038-db796621e7ee';
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'b4bbae3f-9150-4aed-8bf3-cab9c3feb192';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_PATTERN = /^[+()\d][\d\s()/-]{5,}$/;
