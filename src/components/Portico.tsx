@@ -80,16 +80,18 @@ export const BayHeading: React.FC<{
 /* The closing bay of a page: a framed panel on a coloured field. */
 export const ClosingDoor: React.FC<{
   plaster?: Plaster;
+  plaque?: React.ReactNode;
   title: React.ReactNode;
   as?: 'h2' | 'h3';
   children?: React.ReactNode;
   actions: React.ReactNode;
-}> = ({ plaster = 'rosa', title, as = 'h2', children, actions }) => {
+}> = ({ plaster = 'rosa', plaque, title, as = 'h2', children, actions }) => {
   const H = as;
   return (
     <section className={`plaster-${plaster} limewash`}>
       <div className="portico py-16 sm:py-24">
         <div className="mx-auto max-w-3xl bg-marmo text-ferro border border-ferro/40 border-t-4 border-t-terracotta px-6 sm:px-14 py-12 sm:py-14 text-center">
+          {plaque && <Plaque quiet className="mb-5">{plaque}</Plaque>}
           <H className="display-l">{title}</H>
           {children && <div className="mt-5 mx-auto max-w-xl text-[1.05rem] text-antracite">{children}</div>}
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">{actions}</div>

@@ -49,6 +49,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/diagnosi-adhd-adulto" className={linkCls}>
+                  Diagnosi ADHD nell'adulto
+                </Link>
+              </li>
+              <li>
                 <Link to="/supporto-psicologico" className={linkCls}>
                   Supporto psicologico
                 </Link>

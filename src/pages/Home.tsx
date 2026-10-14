@@ -7,6 +7,15 @@ import fotoGiulia from '../assets/foto-giulia.jpg';
 
 const METHOD_FLOOR = ['COMPRENDERE', 'OSSERVARE', 'DEFINIRE OBIETTIVI', 'INTERVENIRE', 'GENERALIZZARE', 'VERIFICARE'];
 
+const ADHD_MOMENTI = [
+  { title: 'Comprendere', text: 'Raccogliere la storia della persona e approfondire le difficoltà attuali.' },
+  { title: 'Valutare', text: 'Integrare colloqui clinici, interviste e strumenti psicodiagnostici.' },
+  {
+    title: 'Restituire e orientare',
+    text: 'Condividere il profilo emerso e, quando utile, individuare strategie e percorsi di psicoeducazione.',
+  },
+];
+
 export const Home: React.FC = () => {
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -203,6 +212,48 @@ export const Home: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SERVIZIO IN EVIDENZA: Diagnosi ADHD nell'adulto ============ */}
+      <section className="plaster-rosa limewash">
+        <div className="portico py-16 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-10 items-start">
+          <div className="lg:col-span-7 space-y-6">
+            <Plaque quiet>Valutazione psicodiagnostica · In studio e online</Plaque>
+            <div className="space-y-2">
+              <p className="civic !text-[0.74rem] text-terracotta-deep">Un servizio dedicato</p>
+              <h2 className="display-xl text-ferro">Diagnosi ADHD nell'adulto</h2>
+            </div>
+            <p className="lede text-ferro">
+              Non sempre l'ADHD è visibile dall'esterno. A volte si riconosce nella fatica necessaria per organizzarsi, mantenere l'attenzione o gestire le richieste di ogni giorno.
+            </p>
+            <p className="text-ferro measure">
+              Mi occupo direttamente di valutazione psicodiagnostica e diagnosi dell'ADHD nell'età adulta, attraverso un percorso clinico strutturato che integra colloqui, storia evolutiva, interviste diagnostiche e strumenti standardizzati.
+            </p>
+            <p className="text-ferro measure">
+              Il percorso prevede una restituzione dei risultati e una relazione psicodiagnostica scritta, con eventuale formulazione diagnostica sulla base degli elementi raccolti.
+            </p>
+            <Door to="/diagnosi-adhd-adulto" tone="iron">
+              Scopri il percorso di valutazione
+            </Door>
+          </div>
+
+          <div className="lg:col-span-5 lg:border-l lg:border-ferro/25 lg:pl-10 space-y-4">
+            <h3 className="civic !text-[0.74rem] text-salvia-deep">Tre momenti collegati</h3>
+            <ol className="ruled">
+              {ADHD_MOMENTI.map((m, i) => (
+                <li key={m.title} className="py-5 grid grid-cols-[2.25rem_1fr] gap-x-3">
+                  <span className="font-display text-[1.35rem] leading-none text-terracotta-deep tabular-nums pt-0.5" aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <div className="space-y-1">
+                    <p className="display-s text-ferro">{m.title}</p>
+                    <p className="text-[0.98rem] text-antracite">{m.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>

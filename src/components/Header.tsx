@@ -6,6 +6,7 @@ import logoGiulia from '../assets/logo-giulia.png';
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [etaDropdownOpen, setEtaDropdownOpen] = useState(false);
+  const [adultiDropdownOpen, setAdultiDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -13,6 +14,7 @@ export const Header: React.FC = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setEtaDropdownOpen(false);
+    setAdultiDropdownOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -35,6 +37,12 @@ export const Header: React.FC = () => {
     { label: 'Supporto genitoriale e lavoro con la rete', path: '/eta-evolutiva#genitori-rete' },
     { label: 'Collaborazione multidisciplinare e raccordo', path: '/eta-evolutiva#collaborazione' },
   ];
+
+  const adultiSubmenuItems = [
+    { label: 'Psicoeducazione e supporto post diagnosi', path: '/neurodivergenze-adulti' },
+    { label: "Diagnosi ADHD nell'adulto", path: '/diagnosi-adhd-adulto', featured: true },
+  ];
+  const adultiActive = adultiSubmenuItems.some((item) => isActive(item.path));
 
   const navLink = (active: boolean) =>
     `relative whitespace-nowrap px-2 2xl:px-3 py-2 text-[0.92rem] 2xl:text-[0.95rem] transition-colors hover:text-terracotta-deep ${
@@ -69,14 +77,14 @@ export const Header: React.FC = () => {
               className="w-[2.6rem] sm:w-[3.5rem] h-auto mix-blend-multiply shrink-0"
             />
             <span className="flex flex-col">
-              <span className="font-display text-[1rem] sm:text-[1.2rem] xl:text-[1.3rem] sm:whitespace-nowrap font-medium leading-tight text-ferro group-hover:text-terracotta-deep transition-colors">
+              <span className="font-display text-[1rem] sm:text-[1.2rem] min-[1360px]:text-[1.3rem] sm:whitespace-nowrap font-medium leading-tight text-ferro group-hover:text-terracotta-deep transition-colors">
                 Dott.ssa Giulia Boccolari
               </span>
               <span className="civic text-[0.66rem] text-antracite-soft">Psicologa</span>
             </span>
           </Link>
 
-          <nav className="hidden xl:flex items-center" aria-label="Navigazione principale">
+          <nav className="hidden min-[1360px]:flex items-center" aria-label="Navigazione principale">
             <Link to="/" className={navLink(isActive('/'))}>
               Home
             </Link>
@@ -126,9 +134,46 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            <Link to="/neurodivergenze-adulti" className={navLink(isActive('/neurodivergenze-adulti'))}>
-              Neurodivergenze adulti
-            </Link>
+            <div
+              className="relative group"
+              onMouseEnter={() => setAdultiDropdownOpen(true)}
+              onMouseLeave={() => setAdultiDropdownOpen(false)}
+            >
+              <Link
+                to="/neurodivergenze-adulti"
+                aria-haspopup="true"
+                aria-expanded={adultiDropdownOpen}
+                className={`${navLink(adultiActive)} flex items-center gap-1`}
+              >
+                <span>Neurodivergenze adulti</span>
+                <ChevronDown className="w-3.5 h-3.5 opacity-70" aria-hidden="true" />
+              </Link>
+
+              <div
+                className={`${panel} left-0 w-[22rem] ${
+                  adultiDropdownOpen ? 'block' : 'hidden'
+                } group-focus-within:block`}
+              >
+                <div className="px-5 pt-4 pb-3 border-b border-ferro/20">
+                  <span className="civic text-[0.68rem] text-salvia-deep">Servizi per adulti</span>
+                </div>
+                <ul className="py-2">
+                  {adultiSubmenuItems.map((item) => (
+                    <li key={item.path}>
+                      <Link
+                        to={item.path}
+                        className={`flex items-baseline gap-3 px-5 py-2 text-[0.92rem] leading-snug hover:bg-crema hover:text-terracotta-deep transition-colors ${
+                          item.featured ? 'font-bold' : ''
+                        }`}
+                      >
+                        <span className={`tick ${item.featured ? 'text-terracotta' : 'text-salvia'}`} aria-hidden="true" />
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
             <Link to="/supporto-psicologico" className={navLink(isActive('/supporto-psicologico'))}>
               Supporto psicologico
@@ -150,13 +195,13 @@ export const Header: React.FC = () => {
               <Instagram className="w-5 h-5" strokeWidth={1.6} />
             </a>
 
-            <Link to="/contatti" className="door door--terra hidden xl:inline-flex !min-h-[2.75rem] !py-2.5">
+            <Link to="/contatti" className="door door--terra hidden min-[1360px]:inline-flex !min-h-[2.75rem] !py-2.5">
               <span>Contattami</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="flex items-center gap-1.5 xl:hidden">
+          <div className="flex items-center gap-1.5 min-[1360px]:hidden">
             <Link to="/contatti" className="door door--terra !min-h-[2.6rem] !px-4 !py-2 !text-[0.85rem]">
               Contattami
             </Link>
@@ -177,7 +222,7 @@ export const Header: React.FC = () => {
       <div aria-hidden="true" className="h-[5px] border-t border-b border-ferro/70" />
 
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-crema border-b border-ferro max-h-[calc(100dvh-5rem)] overflow-y-auto">
+        <div className="min-[1360px]:hidden bg-crema border-b border-ferro max-h-[calc(100dvh-5rem)] overflow-y-auto">
           <div className="portico pt-2 pb-8">
             <div className="ruled">
               <Link to="/" className={mobileLink(isActive('/'))}>
@@ -210,9 +255,27 @@ export const Header: React.FC = () => {
                 </ul>
               </div>
 
-              <Link to="/neurodivergenze-adulti" className={mobileLink(isActive('/neurodivergenze-adulti'))}>
-                Neurodivergenze adulti
-              </Link>
+              <div className="pb-3">
+                <Link to="/neurodivergenze-adulti" className={mobileLink(isActive('/neurodivergenze-adulti'))}>
+                  Neurodivergenze adulti
+                </Link>
+                <ul className="pl-1 space-y-0.5">
+                  {adultiSubmenuItems.slice(1).map((item) => (
+                    <li key={item.path}>
+                      <Link
+                        to={item.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`flex items-baseline gap-3 py-1.5 text-[0.95rem] hover:text-terracotta-deep ${
+                          isActive(item.path) ? 'text-terracotta-deep font-bold' : 'text-antracite font-bold'
+                        }`}
+                      >
+                        <span className="tick text-terracotta" aria-hidden="true" />
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <Link to="/supporto-psicologico" className={mobileLink(isActive('/supporto-psicologico'))}>
                 Supporto psicologico
               </Link>

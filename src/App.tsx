@@ -9,6 +9,7 @@ import { ChiSono } from './pages/ChiSono';
 import { ComeLavoro } from './pages/ComeLavoro';
 import { EtaEvolutiva } from './pages/EtaEvolutiva';
 import { NeurodivergenzeAdulti } from './pages/NeurodivergenzeAdulti';
+import { DiagnosiAdhdAdulto } from './pages/DiagnosiAdhdAdulto';
 import { SupportoPsicologico } from './pages/SupportoPsicologico';
 import { Risorse } from './pages/Risorse';
 import { ArticlePage } from './pages/ArticlePage';
@@ -32,6 +33,7 @@ export const App: React.FC = () => {
             <Route path="/come-lavoro" element={<ComeLavoro />} />
             <Route path="/eta-evolutiva" element={<EtaEvolutiva />} />
             <Route path="/neurodivergenze-adulti" element={<NeurodivergenzeAdulti />} />
+            <Route path="/diagnosi-adhd-adulto" element={<DiagnosiAdhdAdulto />} />
             <Route path="/supporto-psicologico" element={<SupportoPsicologico />} />
             <Route path="/risorse" element={<Risorse />} />
             <Route path="/risorse/:slug" element={<ArticlePage />} />
